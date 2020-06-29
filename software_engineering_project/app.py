@@ -66,8 +66,8 @@ def edit_password():
                 User.user_to_json(user_list, 'software_engineering_project/json_files/UserData.json')
                 return jsonify(Process=resp[0], Process_Message=resp[1])
             else:
-                return jsonify(Process='Invalid', Process_Message='Your account was deactivated because of many tries to'
-                                                                  'access/modify it.Enter in contact with an ADM to '
+                return jsonify(Process='Invalid', Process_Message='Your account was deactivated because of many tries '
+                                                                  'to access/modify it.Enter in contact with an ADM to '
                                                                   'reactivate it.')
         return jsonify(Process='Invalid', Process_Message='This user do not exists or it is invalid.')
     except (KeyError, exceptions.BadRequest):
@@ -210,7 +210,7 @@ def del_user():
     except (KeyError, exceptions.BadRequest):
         return jsonify(Process='ERROR!', Process_Message='Missing information, wrong keys or invalid JSON.')
 
-#testing to up
+
 @app.route('/admin_options', methods=['PUT'])
 def admin_options():
     """This function is special for administrator utilization only.
