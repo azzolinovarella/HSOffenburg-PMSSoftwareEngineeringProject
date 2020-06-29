@@ -7,18 +7,19 @@ class PasswordTest(unittest.TestCase):
     def setUp(self):
         self.password1 = '123456789'
         self.password2 = 'Password'
-        self.password3 = 'Password1234'
+        self.password3 = 'Password1234@'
         self.password4 = 'AV3r15tr0nGP4s5w0rD!@##@!$%'
 
     def test_check_password(self):
-        self.assertEqual(Psw.check_password(self.password1), False)  # Number of conditions is lower than 3
-        self.assertEqual(Psw.check_password(self.password2), False)  # Number of conditions is lower than 3
+        # Using the password's rules set by default --> number of conditions = 4 and between 8 and 64
+        self.assertEqual(Psw.check_password(self.password1), False)  # Number of conditions is lower than 4
+        self.assertEqual(Psw.check_password(self.password2), False)  # Number of conditions is lower than 4
         self.assertEqual(Psw.check_password(self.password3), self.password3)  # Every condition satisfied
         self.assertEqual(Psw.check_password(self.password4), self.password4)  # Every condition satisfied
 
     def test_gen_sha1(self):
         # Using some previous known SHA1 (that is always the same) hashed passwords...
-        self.assertEqual(Psw.gen_sha1(self.password3), '5b96672ae7709eab297550cae362d5bee468c57d')
+        self.assertEqual(Psw.gen_sha1(self.password3), 'a7eab432378cbd437bab745a6b0b83d5e6d13008')
         self.assertNotEqual(Psw.gen_sha1(self.password3), 'b566972ae7709eab297550cae362d5bee45c86d7')
         self.assertEqual(Psw.gen_sha1(self.password2), '8be3c943b1609fffbfc51aad666d0a04adf83c9d')
         self.assertNotEqual(Psw.gen_sha1(self.password2), '3eb8c943b1609fffbfc51aad666d0a04adf8d9c3')

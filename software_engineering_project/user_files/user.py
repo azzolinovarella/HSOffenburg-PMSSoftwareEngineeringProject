@@ -188,3 +188,4 @@ class User:
         else:
             self._warning[0] = False  # Saving that the last time they tried to acess/modify the user data was sucessful
             self._warning[2] = 0  # If the password typed is correct, we return the counter to 0
+

@@ -9,7 +9,9 @@ class Password:
 
     @staticmethod
     def check_password(password):
-        """Set a password according with many popular websites."""
+        """Set a password rules according with many popular websites.
+        The password necessities can be changed in the PasswordEspecifications.json
+        file by setting the values to truo/false or changing the allowed characters"""
 
         # As we want to work with the absolut path (because we need to call this method in different classes)
         # we will 'clean' this path and fix it to the right one (...password_files --> ...json_files).
@@ -18,25 +20,32 @@ class Password:
 
         with open(right_dir_path + '/PasswordEspecifications.json', 'r') as file:  # tirar .. depois
             req = load(file)
-        numb_of_conditions = 0
+
+        c_uper, c_lower, c_number, c_special = False, False, False, False
+
         for i in range(0, len(password)):
-            if password[i].isupper():
-                req['IsUpper'] = True  # If the user has, at least, one upper character, we set it to True
-            if password[i].islower():
-                req['IsLower'] = True  # If the user has, at least, one lower character, we set it to True
+            if password[i].isupper() and req['IsUpper'] is True:
+                c_uper = 1  # If the user has, at least, one upper character, we set it to 1 --> True
+            if password[i].islower() and req['IsLower'] is True:
+                c_lower = 1  # If the user has, at least, one lower character, we set it to 1 --> True
             try:
-                if int(password[i]) in list(range(0, 10)):
-                    req['IsNumber'] = True  # If the user has, at least, one number character, we set it to True
+                if int(password[i]) in list(range(0, 10)) and req['IsNumber'] is True:
+                    c_number = 1  # If the user has, at least, one number character, we set it to 1 --> True
             except ValueError:
                 pass
-            if password[i] in req['Special_possibilities']:
-                req['IsSpecial'] = True  # If the user has, at least, one special character, we set it to True
+            if password[i] in req['Special_possibilities'] and req['IsSpecial'] is True:
+                c_special = 1  # If the user has, at least, one special character, we set it to 1 --> True
             if password[i] not in req['Allowed_char']:
-                return False  # If the user has a illegal character, we end this and don't allow its password
-        for value in req.values():
-            if value is True:
-                numb_of_conditions += 1
-        if numb_of_conditions >= 3 and 8 <= len(password) <= 64:
+                return False  # If the user has a illegal character, we end this and don't allow the password
+
+        conditions_satisfied = c_uper + c_lower + c_number + c_special  # Here we sum the number of conditions satisfied
+
+        minimum_conditions = 0
+        for bol_condition in req.values():
+            if bol_condition is True:  # Here we verify the number of conditions that must be satisfied
+                minimum_conditions += 1
+
+        if conditions_satisfied >= minimum_conditions and 8 <= len(password) <= 64:
             return password  # If the number of conditions is 3 (or more) and the password is greater than 8 and lower than 64, we accept the password
         return False
 
