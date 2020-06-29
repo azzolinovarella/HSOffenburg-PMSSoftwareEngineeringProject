@@ -210,7 +210,7 @@ def del_user():
     except (KeyError, exceptions.BadRequest):
         return jsonify(Process='ERROR!', Process_Message='Missing information, wrong keys or invalid JSON.')
 
-
+#testing to up
 @app.route('/admin_options', methods=['PUT'])
 def admin_options():
     """This function is special for administrator utilization only.
