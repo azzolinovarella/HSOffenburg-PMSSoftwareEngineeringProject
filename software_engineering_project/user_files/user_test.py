@@ -79,31 +79,25 @@ class UserTest(unittest.TestCase):
     def test_change_service(self):
         self.user0.create_service(self.passwords[0], 'Facebook', '1234')
 
-        self.assertEqual(self.user0.change_service('Something', 'Google+', '1234', 'New1234')[1],
+        self.assertEqual(self.user0.change_service('Something', 'Google+', '1234')[1],
                          'Wrong password!')
 
-        self.assertEqual(self.user0.change_service(self.passwords[0], 'Google+', '1234', 'New1234')[1],
+        self.assertEqual(self.user0.change_service(self.passwords[0], 'Google+', '1234')[1],
                          'This user do not have a service with this name.')
 
-        self.assertEqual(self.user0.change_service(self.passwords[0], 'Facebook', 'WrongPW', 'New1234')[1],
-                         'Wrong service password!')
-
-        self.assertEqual(self.user0.change_service(self.passwords[0], 'Facebook', '1234', 'New1234')[1],
+        self.assertEqual(self.user0.change_service(self.passwords[0], 'Facebook', 'New1234')[1],
                          'Service password changed successfully!')
 
     def test_delete_service(self):
         self.user0.create_service(self.passwords[0], 'Gmail', '1234')
 
-        self.assertEqual(self.user0.delete_service('Something', 'Hotmail', '1234')[1],
+        self.assertEqual(self.user0.delete_service('Something', 'Hotmail')[1],
                          'Wrong password!')
 
-        self.assertEqual(self.user0.delete_service(self.passwords[0], 'Hotmail', '1234')[1],
+        self.assertEqual(self.user0.delete_service(self.passwords[0], 'Hotmail')[1],
                          'This user do not have a service with this name.')
 
-        self.assertEqual(self.user0.delete_service(self.passwords[0], 'Gmail', 'Wrong')[1],
-                         'Wrong service password!')
-
-        self.assertEqual(self.user0.delete_service(self.passwords[0], 'Gmail', '1234')[1],
+        self.assertEqual(self.user0.delete_service(self.passwords[0], 'Gmail')[1],
                          'Service deleted successfully!')
 
     def test_get_user_data(self):

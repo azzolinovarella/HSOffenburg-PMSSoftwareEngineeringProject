@@ -40,8 +40,7 @@ class AppTest(unittest.TestCase):
     def test_edit_service(self):
         resp_put = self.app.put('/edit_service',
                                 data=dumps({'user_email': 'test@gmail.com', 'user_password': 'Password1234',
-                                            'service_name': 'Facebook', 'service_password': 'FacebookPassword',
-                                            'service_new_password': 'FacebookNewPassword'}),
+                                            'service_name': 'Facebook', 'service_new_password': 'FacebookNewPassword'}),
                                 content_type='application/json')
 
         self.assertEqual(resp_put.status_code, 200), 'We should receive an OK (200).'
@@ -49,8 +48,7 @@ class AppTest(unittest.TestCase):
     def test_del_service(self):
         resp_delete = self.app.delete('/del_service',
                                       data=dumps({'user_email': 'test@gmail.com', 'user_password': 'Password1234',
-                                                  'service_name': 'Facebook',
-                                                  'service_password': 'FacebookNewPassword'}),
+                                                  'service_name': 'Facebook'}),
                                       content_type='application/json')
 
         self.assertEqual(resp_delete.status_code, 200), 'We should receive an OK (200).'

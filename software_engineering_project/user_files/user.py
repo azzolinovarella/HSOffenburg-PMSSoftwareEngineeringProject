@@ -126,7 +126,7 @@ class User:
         self._alert(True)
         return 'Invalid', 'Wrong password!'
 
-    def change_service(self, user_password, service_name, service_password, service_new_password):
+    def change_service(self, user_password, service_name, service_new_password):
         """This method allows the user to change its service's password."""
 
         if Psw.valid_password(user_password, self._hspassword):
@@ -136,17 +136,15 @@ class User:
             if service_name in all_service_names:
                 pos2 = all_service_names.index(service_name)
                 service = self._service_list[pos2]
-                if Psw.valid_password(service_password, service["service_hs_password"]):
-                    service["service_hs_password"] = Psw.gen_bcrypt(service_new_password)
-                    service["service_hibp"] = Psw.hibp(service_new_password)
-                    service["service_last_modified"] = str(datetime.now())
-                    return 'Valid', 'Service password changed successfully!'
-                return 'Invalid', 'Wrong service password!'
+                service["service_hs_password"] = Psw.gen_bcrypt(service_new_password)
+                service["service_hibp"] = Psw.hibp(service_new_password)
+                service["service_last_modified"] = str(datetime.now())
+                return 'Valid', 'Service password changed successfully!'
             return 'Invalid', 'This user do not have a service with this name.'
         self._alert(True)  # Set alert True because there's a chance of somebody is trying to modify the user data
         return 'Invalid', 'Wrong password!'
 
-    def delete_service(self, user_password, service_name, service_password):
+    def delete_service(self, user_password, service_name):
         """This method allows the user to delete a service."""
 
         if Psw.valid_password(user_password, self._hspassword):
@@ -155,11 +153,8 @@ class User:
             all_service_names = [all_services[i]["service_name"] for i in range(0, len(all_services))]
             if service_name in all_service_names:
                 pos2 = all_service_names.index(service_name)
-                service = self._service_list[pos2]
-                if Psw.valid_password(service_password, service["service_hs_password"]):
-                    del self._service_list[pos2]
-                    return 'Valid', 'Service deleted successfully!'
-                return 'Invalid', 'Wrong service password!'
+                del self._service_list[pos2]
+                return 'Valid', 'Service deleted successfully!'
             return 'Invalid', 'This user do not have a service with this name.'
         self._alert(True)  # Set alert True because there's a chance of somebody is trying to modify the user data
         return 'Invalid', 'Wrong password!'

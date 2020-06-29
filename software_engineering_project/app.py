@@ -111,7 +111,6 @@ def edit_service():
         user_email = req_data['user_email']
         user_password = req_data['user_password']
         service_name = req_data['service_name']
-        service_password = req_data['service_password']
         service_new_password = req_data['service_new_password']
 
         email_list, user_list = User.get_emails_and_users('software_engineering_project/json_files/UserData.json')
@@ -119,7 +118,7 @@ def edit_service():
 
         if validator == 'exists':
             if user_list[pos].active is True:
-                resp = user_list[pos].change_service(user_password, service_name, service_password, service_new_password)
+                resp = user_list[pos].change_service(user_password, service_name, service_new_password)
                 User.user_to_json(user_list, 'software_engineering_project/json_files/UserData.json')
                 return jsonify(Process=resp[0], Process_Message=resp[1])
             else:
@@ -140,14 +139,13 @@ def del_service():
         user_email = req_data['user_email']
         user_password = req_data['user_password']
         service_name = req_data['service_name']
-        service_password = req_data['service_password']
 
         email_list, user_list = User.get_emails_and_users('software_engineering_project/json_files/UserData.json')
         validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position
 
         if validator == 'exists':
             if user_list[pos].active is True:
-                resp = user_list[pos].delete_service(user_password, service_name, service_password)
+                resp = user_list[pos].delete_service(user_password, service_name)
                 User.user_to_json(user_list, 'software_engineering_project/json_files/UserData.json')
                 return jsonify(Process=resp[0], Process_Message=resp[1])
             else:
