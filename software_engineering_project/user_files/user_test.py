@@ -64,7 +64,7 @@ class UserTest(unittest.TestCase):
                          'New password is invalid.')  # 'Anything' is a non valid password
 
         self.assertEqual(self.user0.change_user_password(self.passwords[0], 'Pass1234@')[1],
-                         'Password changed successfully!')  # 'Pass1234' is a valid password - standard password
+                         'Password changed successfully!')  # 'Pass1234@' is a valid password - standard password
 
     def test_create_service(self):
         self.assertEqual(self.user0.create_service('Something', 'Instagram', '1234')[1],
