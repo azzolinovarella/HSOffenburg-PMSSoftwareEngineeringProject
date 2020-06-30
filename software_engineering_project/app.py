@@ -8,16 +8,15 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
-    return 'This is working!! Options\n' \
-           '/add_user --> POST\n' \
-           '/edit_password --> PUT\n' \
-           '/add_service --> PUT\n' \
-           '/edit_service --> PUT\n' \
-           '/del_service --> DELETE\n' \
-           '/check_user --> GET\n' \
-           '/del_user --> DELETE\n' \
-           '/admin_options --> PUT\n' \
-           '/admin_edit --> PUT'
+    return jsonify(App='Working', Options=['/add_user --> POST',
+                                           '/edit_password --> PUT',
+                                           '/add_service --> PUT',
+                                           '/edit_service --> PUT',
+                                           '/del_service --> DELETE',
+                                           '/check_user --> GET',
+                                           '/del_user --> DELETE',
+                                           '/admin_options --> PUT',
+                                           '/admin_edit --> PUT'])
 
 
 @app.route('/add_user', methods=['POST'])
@@ -94,9 +93,10 @@ def add_service():
                 User.user_to_json(user_list, 'software_engineering_project/json_files/UserData.json')
                 return jsonify(Process=resp[0], Process_Message=resp[1])
             else:
-                return jsonify(Process='Invalid', Process_Message='Your account was deactivated because of many tries to'
-                                                                  'access/modify it.Enter in contact with an ADM to '
-                                                                  'reactivate it.')
+                return jsonify(Process='Invalid',
+                               Process_Message='Your account was deactivated because of many tries to'
+                                               'access/modify it.Enter in contact with an ADM to '
+                                               'reactivate it.')
         return jsonify(Process='Invalid', Process_Message='This user do not exists or it is invalid.')
     except (KeyError, exceptions.BadRequest):
         return jsonify(Process='ERROR!', Process_Message='Missing information, wrong keys or invalid JSON.')
@@ -122,9 +122,10 @@ def edit_service():
                 User.user_to_json(user_list, 'software_engineering_project/json_files/UserData.json')
                 return jsonify(Process=resp[0], Process_Message=resp[1])
             else:
-                return jsonify(Process='Invalid', Process_Message='Your account was deactivated because of many tries to'
-                                                                  'access/modify it.Enter in contact with an ADM to '
-                                                                  'reactivate it.')
+                return jsonify(Process='Invalid',
+                               Process_Message='Your account was deactivated because of many tries to'
+                                               'access/modify it.Enter in contact with an ADM to '
+                                               'reactivate it.')
         return jsonify(Process='Invalid', Process_Message='This user do not exists or it is invalid.')
     except (KeyError, exceptions.BadRequest):
         return jsonify(Process='ERROR!', Process_Message='Missing information, wrong keys or invalid JSON.')
@@ -149,9 +150,10 @@ def del_service():
                 User.user_to_json(user_list, 'software_engineering_project/json_files/UserData.json')
                 return jsonify(Process=resp[0], Process_Message=resp[1])
             else:
-                return jsonify(Process='Invalid', Process_Message='Your account was deactivated because of many tries to'
-                                                                  'access/modify it.Enter in contact with an ADM to '
-                                                                  'reactivate it.')
+                return jsonify(Process='Invalid',
+                               Process_Message='Your account was deactivated because of many tries to'
+                                               'access/modify it.Enter in contact with an ADM to '
+                                               'reactivate it.')
         return jsonify(Process='Invalid', Process_Message='This user do not exists or it is invalid.')
     except (KeyError, exceptions.BadRequest):
         return jsonify(Process='ERROR!', Process_Message='Missing information, wrong keys or invalid JSON.')
@@ -175,9 +177,10 @@ def check_user():
                 User.user_to_json(user_list, 'software_engineering_project/json_files/UserData.json')
                 return jsonify(Process=resp[0], Process_Message=resp[1])
             else:
-                return jsonify(Process='Invalid', Process_Message='Your account was deactivated because of many tries to'
-                                                                  'access/modify it.Enter in contact with an ADM to '
-                                                                  'reactivate it.')
+                return jsonify(Process='Invalid',
+                               Process_Message='Your account was deactivated because of many tries to'
+                                               'access/modify it.Enter in contact with an ADM to '
+                                               'reactivate it.')
         return jsonify(Process='Invalid', Process_Message='This user do not exists or it is invalid.')
     except (KeyError, exceptions.BadRequest):
         return jsonify(Process='ERROR!', Process_Message='Missing information, wrong keys or invalid JSON.')
@@ -203,9 +206,10 @@ def del_user():
                 User.user_to_json(user_list, 'software_engineering_project/json_files/UserData.json')
                 return jsonify(Process=resp[0], Process_Message=resp[1])
             else:
-                return jsonify(Process='Invalid', Process_Message='Your account was deactivated because of many tries to'
-                                                                  'access/modify it.Enter in contact with an ADM to '
-                                                                  'reactivate it.')
+                return jsonify(Process='Invalid',
+                               Process_Message='Your account was deactivated because of many tries to'
+                                               'access/modify it.Enter in contact with an ADM to '
+                                               'reactivate it.')
         return jsonify(Process='Invalid', Process_Message='This user do not exists or it is invalid.')
     except (KeyError, exceptions.BadRequest):
         return jsonify(Process='ERROR!', Process_Message='Missing information, wrong keys or invalid JSON.')
@@ -279,8 +283,6 @@ def admin_edit():
         return jsonify(Process='Invalid', Process_Message='Wrong admin validation!')
     except (KeyError, exceptions.BadRequest):
         return jsonify(Process='ERROR!', Process_Message='Missing information, wrong keys or invalid JSON.')
-
-# admin_edit_password_rules??
 
 
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ class UserTest(unittest.TestCase):
 
     def setUp(self):
         self.emails = ['test1@gmail.com', 'test2@stud.hs-offenburg.de']
-        self.passwords = ['Password1234', 'Password!@#$']
+        self.passwords = ['Password1234!', 'Password!@#$1']
         hspasswords = [Psw.gen_bcrypt(self.passwords[0]), Psw.gen_bcrypt(self.passwords[1])]
         hibp = [Psw.hibp(self.passwords[0]), Psw.hibp(self.passwords[1])]
         creation_dates = [str(datetime.now()), str(datetime.now())]
@@ -22,7 +22,7 @@ class UserTest(unittest.TestCase):
         user_data = ['test@gmail.com', '1234']
         self.assertNotIsInstance(User.create_user(*user_data), User)  # Invalid password
 
-        user_data[1] = 'Pass1234'
+        user_data[1] = 'Pass1234@'
         self.assertIsInstance(User.create_user(*user_data), User)  # Password Ok --> now we can create the user
 
     def test_user_to_json(self):
@@ -63,8 +63,8 @@ class UserTest(unittest.TestCase):
         self.assertEqual(self.user0.change_user_password(self.passwords[0], 'Anything')[1],
                          'New password is invalid.')  # 'Anything' is a non valid password
 
-        self.assertEqual(self.user0.change_user_password(self.passwords[0], 'Pass1234')[1],
-                         'Password changed successfully!')  # 'Pass1234' is a valid password
+        self.assertEqual(self.user0.change_user_password(self.passwords[0], 'Pass1234@')[1],
+                         'Password changed successfully!')  # 'Pass1234' is a valid password - standard password
 
     def test_create_service(self):
         self.assertEqual(self.user0.create_service('Something', 'Instagram', '1234')[1],
