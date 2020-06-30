@@ -21,7 +21,7 @@ class Password:
         with open(right_dir_path + '/PasswordEspecifications.json', 'r') as file:  # tirar .. depois
             req = load(file)
 
-        c_uper, c_lower, c_number, c_special = False, False, False, False
+        c_uper, c_lower, c_number, c_special = False, False, False, False  # We will change if satisfied
 
         for i in range(0, len(password)):
             if password[i].isupper() and req['IsUpper'] is True:
@@ -53,7 +53,7 @@ class Password:
     def gen_sha1(password):
         """Return your hashed password in SHA1."""
 
-        return sha1(password.encode('utf-8')).hexdigest()
+        return sha1(password.encode('utf-8')).hexdigest()  # Usefull for HIBP
 
     @staticmethod
     def gen_bcrypt(password):
@@ -84,6 +84,6 @@ class Password:
         pas_verificator = pas_in_sha1[5::]  # To 'clean' the password to search for it in the list
         for element in pas_list:
             if element[0:35] == pas_verificator:
-                return True, f'Pwned {element[36::]} time(s)'
+                return True, f'Pwned {element[36::]} time(s)'  # Number of times
         return False, 'Pwned 0 time(s)'
 

@@ -29,7 +29,7 @@ def add_user():
         user_password = req_data['user_password']
 
         email_list, user_list = User.get_emails_and_users('software_engineering_project/json_files/UserData.json')
-        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position
+        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position of the email in the list (if exists)
 
         if validator == 'exists':
             return jsonify(Process='Invalid', Process_Message='This user already exists.')
@@ -57,7 +57,7 @@ def edit_password():
         user_new_password = req_data['user_new_password']
 
         email_list, user_list = User.get_emails_and_users('software_engineering_project/json_files/UserData.json')
-        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position
+        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position of the email in the list (if exists)
 
         if validator == 'exists':
             if user_list[pos].active is True:
@@ -85,7 +85,7 @@ def add_service():
         service_password = req_data['service_password']
 
         email_list, user_list = User.get_emails_and_users('software_engineering_project/json_files/UserData.json')
-        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position
+        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position of the email in the list (if exists)
 
         if validator == 'exists':
             if user_list[pos].active is True:
@@ -114,7 +114,7 @@ def edit_service():
         service_new_password = req_data['service_new_password']
 
         email_list, user_list = User.get_emails_and_users('software_engineering_project/json_files/UserData.json')
-        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position
+        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position of the email in the list (if exists)
 
         if validator == 'exists':
             if user_list[pos].active is True:
@@ -142,7 +142,7 @@ def del_service():
         service_name = req_data['service_name']
 
         email_list, user_list = User.get_emails_and_users('software_engineering_project/json_files/UserData.json')
-        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position
+        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position of the email in the list (if exists)
 
         if validator == 'exists':
             if user_list[pos].active is True:
@@ -169,7 +169,7 @@ def check_user():
         user_password = req_data['user_password']
 
         email_list, user_list = User.get_emails_and_users('software_engineering_project/json_files/UserData.json')
-        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position
+        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position of the email in the list (if exists)
 
         if validator == 'exists':
             if user_list[pos].active is True:
@@ -196,7 +196,7 @@ def del_user():
         user_password = req_data['user_password']
 
         email_list, user_list = User.get_emails_and_users('software_engineering_project/json_files/UserData.json')
-        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position
+        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position of the email in the list (if exists)
 
         if validator == 'exists':
             if user_list[pos].active is True:
@@ -233,7 +233,7 @@ def admin_options():
         user_email = req_data['user_email']
 
         email_list, user_list = User.get_emails_and_users('software_engineering_project/json_files/UserData.json')
-        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position
+        validator, pos = User.check_email(user_email, email_list)  # Get the email list, and the position of the email in the list (if exists)
 
         if Admin.admin_checker(admin_login, admin_pw1, admin_pw2,
                                'software_engineering_project/json_files/AdminEspecifications.json'):

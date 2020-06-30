@@ -2,6 +2,7 @@ from random import sample
 from json import load, dumps
 from datetime import datetime
 from ..password_files.password import Password as Psw
+from ..user_files.user import User
 
 
 class Admin:
@@ -11,7 +12,7 @@ class Admin:
         """This method checks if the admin_user data is correct or not."""
 
         with open(file_path, 'r') as file:
-            admin_rules = load(file)  # Rever como salva as infos do arquivo!!
+            admin_rules = load(file)  # Load the verificators saved
 
         if admin == admin_rules['admin_login']:
             hs1 = admin_rules['admin_hs_pw1']
@@ -41,7 +42,7 @@ class Admin:
     def delete(user):
         """This method is used to delete a user from our system."""
 
-        if isinstance(user, object):
+        if isinstance(user, User):
             del user
             return 'Valid', 'User deleted.'
         return 'Invalid', 'This is not an user.'
@@ -52,10 +53,10 @@ class Admin:
 
         char = "abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?/.,:;'_-+="
         password = "".join(
-            sample(char, 32))  # WE GENERATE A RANDOM PASSWORD TO ALLOW THE USER TO CHANGE IT LATTER
+            sample(char, 32))  # We generate a random password to allow the user to change it latter
         hspassword = Psw.gen_bcrypt(password)
         user._hspassword = hspassword
-        user._lastmodified = 'Edited by the admin in - ' + str(datetime.now())
+        user._lastmodified = 'Edited by the admin in - ' + str(datetime.now())  # To show that the admin edited it
         user._hibp = Psw.hibp(password)
         return 'Valid', f'The user {user._email} new password is {password} '
 
@@ -68,5 +69,5 @@ class Admin:
         admin_data = {"admin_login": new_admin, "admin_hs_pw1": new_hs_ver1, "admin_hs_pw2": new_hs_ver2}
         with open(file_path, 'w') as file:
             ret = dumps(admin_data, indent=4)
-            file.write(ret)
+            file.write(ret)  # Writing the new admin data in the file
 

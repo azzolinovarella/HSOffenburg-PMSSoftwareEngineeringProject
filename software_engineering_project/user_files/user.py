@@ -7,7 +7,7 @@ from ..password_files.password import Password as Psw
 
 class User:
 
-    def __init__(self, email, hspassword, hibp, creationdate, service_list=[], lastmodified=None,
+    def __init__(self, email, hspassword, hibp, creationdate, lastmodified=None, service_list=[],
                  warning=[False, 'Never', 0], active=True):
         """This is the constructor method and, so, here we define what the
          object from User may have."""
@@ -38,12 +38,12 @@ class User:
         """This method creates a user for our system, but do not add its services
         (that should be added in another method after)."""
 
-        validator = Psw.check_password(user_password)
+        validator = Psw.check_password(user_password)  # Check if the password is valid
         if validator is False:
             return 'Invalid password.'
         user_hs_psw = Psw.gen_bcrypt(user_password)
         user_hibp = Psw.hibp(user_password)
-        new_user = User(user_email, user_hs_psw, user_hibp, str(datetime.now()))
+        new_user = User(user_email, user_hs_psw, user_hibp, str(datetime.now()))  # Create the user
         return new_user
 
     @staticmethod
@@ -96,7 +96,7 @@ class User:
     def change_user_password(self, user_password, user_new_password):
         """This method allows the user to change its system's password."""
 
-        if Psw.valid_password(user_password, self._hspassword):
+        if Psw.valid_password(user_password, self._hspassword):  # Verify if the password matches
             self._alert(False)  # Set alert False because the user's data is ok
             if Psw.check_password(user_new_password) is False:
                 return 'Invalid', 'New password is invalid.'
@@ -108,9 +108,9 @@ class User:
         return 'Invalid', 'Wrong password!'
 
     def create_service(self, user_password, service_name, service_password):
-        """This method allows the user to add a service."""
+        """This method allows the user to add a service/application."""
 
-        if Psw.valid_password(user_password, self._hspassword):
+        if Psw.valid_password(user_password, self._hspassword):  # Verify if the password matches
             self._alert(False)  # Set alert False because the user's data is ok
             all_services = self._service_list
             all_service_names = [all_services[i]["service_name"] for i in range(0, len(all_services))]
@@ -129,7 +129,7 @@ class User:
     def change_service(self, user_password, service_name, service_new_password):
         """This method allows the user to change its service's password."""
 
-        if Psw.valid_password(user_password, self._hspassword):
+        if Psw.valid_password(user_password, self._hspassword):  # Verify if the password matches
             self._alert(False)  # Set alert False because the user's data is ok
             all_services = self._service_list
             all_service_names = [all_services[i]["service_name"] for i in range(0, len(all_services))]
@@ -147,7 +147,7 @@ class User:
     def delete_service(self, user_password, service_name):
         """This method allows the user to delete a service."""
 
-        if Psw.valid_password(user_password, self._hspassword):
+        if Psw.valid_password(user_password, self._hspassword):  # Verify if the password matches
             self._alert(False)  # Set alert False because the user's data is ok
             all_services = self._service_list
             all_service_names = [all_services[i]["service_name"] for i in range(0, len(all_services))]
@@ -162,13 +162,13 @@ class User:
     def get_user_data(self, user_password):
         """This method allows the user to get your data in JSON format."""
 
-        if Psw.valid_password(user_password, self._hspassword):
+        if Psw.valid_password(user_password, self._hspassword):  # Verify if the password matches
             self._alert(False)  # Set alert False because the user's data is ok
             return 'Valid', self.__dict__
         self._alert(True)  # Set alert True because there's a chance of somebody is trying to modify the user data
         return 'Invalid', 'Wrong password!'
 
-    def delete_user(self, user_password):
+    def delete_user(self, user_password):  # Verify if the password matches
         """This method allows the user to delete your system's account."""
         if Psw.valid_password(user_password, self._hspassword):
             return 'Valid', 'User deleted successfully!'

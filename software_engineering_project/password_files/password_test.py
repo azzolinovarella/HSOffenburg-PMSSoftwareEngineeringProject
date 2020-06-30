@@ -25,10 +25,10 @@ class PasswordTest(unittest.TestCase):
         self.assertNotEqual(Psw.gen_sha1(self.password2), '3eb8c943b1609fffbfc51aad666d0a04adf8d9c3')
 
     def test_valid_password(self):
-        self.assertTrue(Psw.valid_password(self.password1, Psw.gen_bcrypt(self.password1)))
-        self.assertFalse(Psw.valid_password(self.password1, Psw.gen_bcrypt(self.password2)))
-        self.assertTrue(Psw.valid_password(self.password2, Psw.gen_bcrypt(self.password2)))
-        self.assertFalse(Psw.valid_password(self.password2, Psw.gen_bcrypt(self.password1)))
+        self.assertTrue(Psw.valid_password(self.password1, Psw.gen_bcrypt(self.password1)))  # Same passwords
+        self.assertFalse(Psw.valid_password(self.password1, Psw.gen_bcrypt(self.password2)))  # Different passwords
+        self.assertTrue(Psw.valid_password(self.password2, Psw.gen_bcrypt(self.password2)))  # Same passwords
+        self.assertFalse(Psw.valid_password(self.password2, Psw.gen_bcrypt(self.password1)))  # Different passwords
 
     def test_hibp(self):
         # Using the password that had already been leaked (1,2 and 3) and one (4) that not yet (17/06/2020 - 15:56)

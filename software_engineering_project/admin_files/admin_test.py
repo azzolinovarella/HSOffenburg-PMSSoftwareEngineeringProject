@@ -40,9 +40,9 @@ class AdminTest(unittest.TestCase):
         self.assertTrue(self.user.active)  # Now the user should be active
 
     def test_deactivate(self):
-        self.assertTrue(self.user.active)
-        Admin.deactivate(self.user)
-        self.assertFalse(self.user.active)
+        self.assertTrue(self.user.active)  # Checking that the user is active
+        Admin.deactivate(self.user)  # The admin process
+        self.assertFalse(self.user.active)  # User should be inactive now
 
     def test_random_password(self):
         old_hs_pw = self.user._hspassword
