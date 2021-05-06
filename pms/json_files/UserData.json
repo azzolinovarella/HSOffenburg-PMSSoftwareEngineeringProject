@@ -1,0 +1,54 @@
+[{
+    "_email": "exemplo_de_email@gmail.com",
+    "_hspassword": "$2b$12$uwyqtYyhFqCe7Vnad40Kz.0G4mMFHe1FfzHrCK3EyRpwUqUBxUB92",
+    "_hibp": [
+        false,
+        "Pwned 0 time(s)"
+    ],
+    "_creationdate": "2021-05-06 03:03:53.617954",
+    "_lastmodified": null,
+    "_service_list": [],
+    "_warning": [
+        false,
+        "Never",
+        0
+    ],
+    "_active": true
+},{
+    "_email": "felipe@gmail.com",
+    "_hspassword": "$2b$12$rGIiOr5/K/5kRcS9znESFOgmUQKoRLRkjQMDtkpMuqFDXgY4zNl3S",
+    "_hibp": [
+        false,
+        "Pwned 0 time(s)"
+    ],
+    "_creationdate": "2021-05-06 02:03:03.093902",
+    "_lastmodified": "2021-05-06 02:10:30.316143",
+    "_service_list": [
+        {
+            "service_name": "Facebook",
+            "service_hs_password": "$2b$12$hfOf4inY2D0C3dpSHKPkxOhmApl45dJIzGb4zX.lxpCvMwFikpXUi",
+            "service_hibp": [
+                true,
+                "Pwned 3861493 time(s)"
+            ],
+            "service_creation_date": "2021-05-06 02:10:51.537441",
+            "service_last_modified": null
+        },
+        {
+            "service_name": "Google",
+            "service_hs_password": "$2b$12$3br4YLWkxtH05YUU8owbR.a1QBGwmQs/a.nFM4ern9WBOAuM3f3d2",
+            "service_hibp": [
+                true,
+                "Pwned 8012567 time(s)"
+            ],
+            "service_creation_date": "2021-05-06 02:21:56.044637",
+            "service_last_modified": null
+        }
+    ],
+    "_warning": [
+        false,
+        "2021-05-06 02:10:01.360138",
+        0
+    ],
+    "_active": true
+}]
